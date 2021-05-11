@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "pb/auth";
+
+message UserEmailSignInRequest {
+  string email = 1;
+  string pin = 2;
+}
+
+message UserPhoneSignInRequest {
+  string phone = 1;
+  string pin = 2;
+}
+
+message UserSignInReply {
+  string auth_id = 1;
+  string token = 2;
+}
+
+message UserTokenValidateRequest {
+  string token = 1;
+}
+
+message UserTokenValidateReply {
+  string auth_id = 1;
+}
+
+service AuthenticationService {
+  rpc AuthenticateToken(UserTokenValidateRequest) returns (UserTokenValidateReply) {}
+  rpc EmailSignIn(UserEmailSignInRequest) returns (UserSignInReply) {}
+  rpc PhoneSignIn(UserPhoneSignInRequest) returns (UserSignInReply) {}
+}

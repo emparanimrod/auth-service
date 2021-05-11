@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "pb/auth";
+
+// UserRegistrationRequest parameters sent to auth microservice
+message UserRegistrationRequest {
+  string firstname = 1;
+  string lastname = 2;
+  string email = 3;
+  string phone = 4;
+  string pin = 5;
+  string usertype = 6;
+}
+
+// We expect this format of a response back from auth microservice after registration
+message UserRegistrationReply {
+  string auth_id = 1;
+}
+
+service RegistrationService {
+  rpc Register(UserRegistrationRequest) returns (UserRegistrationReply) {}
+}
